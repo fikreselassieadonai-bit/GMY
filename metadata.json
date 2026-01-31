@@ -1,0 +1,7 @@
+{
+  "name": "Adu",
+  "description": "A high-performance in-browser audio converter powered by FFmpeg.wasm and Gemini AI for smart metadata generation and analysis. Convert seamlessly between 500+ audio formats with Adu.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
