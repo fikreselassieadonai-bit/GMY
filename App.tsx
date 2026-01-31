@@ -296,12 +296,18 @@ const App: React.FC = () => {
     });
   }, []);
 
+  // Fix: Explicitly type 'file' parameter as 'File' to avoid TS inference errors with FileList conversion.
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    const newFiles: FileState[] = Array.from(e.target.files).map(file => ({
+    const newFiles: FileState[] = Array.from(e.target.files).map((file: File) => ({
       id: Math.random().toString(36).substr(2, 9),
-      file, name: file.name, size: file.size, type: file.type,
-      status: 'idle', progress: 0, outputFormat: 'MP3'
+      file, 
+      name: file.name, 
+      size: file.size, 
+      type: file.type,
+      status: 'idle', 
+      progress: 0, 
+      outputFormat: 'MP3'
     }));
     setFiles(prev => [...prev, ...newFiles]);
     if (fileInputRef.current) fileInputRef.current.value = ''; 
@@ -353,7 +359,7 @@ const App: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#0b1120] p-6">
         <div className="max-w-sm w-full glass-panel rounded-[3rem] p-10 text-center border-sky-500/20 shadow-2xl relative overflow-hidden">
           <Zap className="w-10 h-10 text-sky-400 animate-bounce mx-auto mb-6" />
-          <h2 className="text-2xl font-black text-white mb-2">Am-Adu Ready</h2>
+          <h2 className="text-2xl font-black text-white mb-2">Adu Studio Ready</h2>
           <p className="text-slate-400 text-sm mb-8 leading-relaxed font-medium">{statusMessage}</p>
           <Loader2 className="w-6 h-6 text-sky-500 animate-spin mx-auto opacity-50" />
         </div>
@@ -369,12 +375,12 @@ const App: React.FC = () => {
             <div className="bg-sky-500 p-2 rounded-xl shadow-lg shadow-sky-500/20 group-hover:scale-110 transition-transform">
               <Music className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-xl font-black tracking-tighter">Am<span className="gradient-text">music</span></h1>
+            <h1 className="text-xl font-black tracking-tighter">Adu<span className="gradient-text">Studio</span></h1>
           </div>
           <div className="flex items-center gap-4">
             <div className="bg-slate-900/80 px-4 py-1.5 rounded-full border border-white/5 flex items-center gap-2">
                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-               <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Native Adu Online</span>
+               <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Native Engine Online</span>
             </div>
           </div>
         </div>
@@ -383,11 +389,11 @@ const App: React.FC = () => {
       <main className="max-w-6xl mx-auto px-6 mt-10">
         <section className="mb-12">
             <h2 className="text-5xl sm:text-7xl font-black mb-4 tracking-tighter leading-[0.85]">
-              Adu Audio<br />
-              <span className="gradient-text">Studio.</span>
+              Adu Universal<br />
+              <span className="gradient-text">Audio Studio.</span>
             </h2>
             <p className="text-slate-400 text-lg max-w-xl mb-10 leading-relaxed font-medium">
-              Native conversion across 500+ specialized audio extensions. Zero uploads, infinite precision.
+              Transform your audio files natively across 500+ specialized extensions. Instant, secure, and precise.
             </p>
             <button onClick={() => fileInputRef.current?.click()} className="bg-white text-black px-10 py-5 rounded-[2rem] font-black flex items-center gap-4 transition-all shadow-xl hover:bg-slate-200 active:scale-95 uppercase tracking-tighter text-base">
               <Upload className="w-6 h-6" /> UPLOAD AUDIO TO STUDIO
